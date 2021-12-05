@@ -1,2 +1,3 @@
 .idea
 .gradle
+src/main/java/ee/taltech/weathermap/store/KeyStore.java
