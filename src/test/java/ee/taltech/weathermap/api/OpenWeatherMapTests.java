@@ -1,6 +1,13 @@
 package ee.taltech.weathermap.api;
 
+import ee.taltech.weathermap.store.KeyStore;
 import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.given;
+import static java.net.HttpURLConnection.HTTP_OK;
+import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasKey;
 
 
 public class OpenWeatherMapTests {
@@ -11,21 +18,51 @@ public class OpenWeatherMapTests {
      */
     @Test
     public void whenCalledWithoutApiKeyReturnHttpUnauthorized() {
-        //TODO
+        given()
+                .queryParam("q", "Keila")
+                .queryParam("units", "metric")
+                .when()
+                .get(BASE_URL)
+                .then()
+                .statusCode(HTTP_UNAUTHORIZED);
     }
 
     @Test
     public void shouldReturnHttpOkWhenCityNameIsGiven() {
-        //TODO
+        given()
+                .queryParam("q", "Keila")
+                .queryParam("units", "metric")
+                .queryParam("appid", KeyStore.API_KEY)
+                .when()
+                .get(BASE_URL)
+                .then()
+                .statusCode(HTTP_OK);
     }
 
     @Test
     public void shouldReturnCityNameWhenCityNameIsGiven() {
-        //TODO
+        given()
+                .queryParam("q", "keila")
+                .queryParam("units", "metric")
+                .queryParam("appid", KeyStore.API_KEY)
+                .when()
+                .get(BASE_URL)
+                .then()
+                .body("$", hasKey("name"))
+                .body("name", equalTo("Keila"));
     }
 
     @Test
     public void shouldHaveCoordinatesBlockWhenCorrectCityNameIsGiven() {
-        //TODO
+        given()
+                .queryParam("q", "keila")
+                .queryParam("units", "metric")
+                .queryParam("appid", KeyStore.API_KEY)
+                .when()
+                .get(BASE_URL)
+                .then()
+                .body("$", hasKey("coord")) // $ - terve body
+                .body("coord", hasKey("lon"))
+                .body("coord", hasKey("lat"));
     }
 }
