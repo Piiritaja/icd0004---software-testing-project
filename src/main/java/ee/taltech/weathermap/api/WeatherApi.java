@@ -5,6 +5,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import ee.taltech.weathermap.model.CurrentWeatherData;
+import ee.taltech.weathermap.model.response.WeatherDetailsResponse;
 import ee.taltech.weathermap.store.KeyStore;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
@@ -13,7 +14,7 @@ import static com.sun.jersey.api.json.JSONConfiguration.FEATURE_POJO_MAPPING;
 
 public class WeatherApi {
 
-    public CurrentWeatherData getCurrentWeatherData(String cityName) {
+    public WeatherDetailsResponse getCurrentWeatherData(String cityName) {
         Client client = getConfiguredClient();
 
         ClientResponse response = client.resource("https://api.openweathermap.org/data/2.5/weather")
@@ -22,7 +23,7 @@ public class WeatherApi {
                 .queryParam("units", "metric")
                 .get(ClientResponse.class);
 
-        return response.getEntity(CurrentWeatherData.class);
+        return response.getEntity(WeatherDetailsResponse.class);
     }
 
     private static Client getConfiguredClient() {

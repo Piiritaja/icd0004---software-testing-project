@@ -1,6 +1,7 @@
 package ee.taltech.weathermap.api;
 
 import ee.taltech.weathermap.model.CurrentWeatherData;
+import ee.taltech.weathermap.model.response.WeatherDetailsResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class WeatherApiTest {
         String cityName = "Keila";
         WeatherApi weatherApi = new WeatherApi();
 
-        CurrentWeatherData weatherData = weatherApi.getCurrentWeatherData(cityName);
+        WeatherDetailsResponse weatherData = weatherApi.getCurrentWeatherData(cityName);
 
         assertEquals(cityName, weatherData.getName());
     }
