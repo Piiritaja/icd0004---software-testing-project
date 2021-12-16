@@ -6,8 +6,10 @@ import ee.taltech.weathermap.model.WeatherReport;
 
 public class Io {
 
-    public String getWeatherReport(String cityName) {
+    public WeatherReport getWeatherReport(String cityName) {
         Gson gson = new Gson();
-        return gson.toJson(WeatherReport.from(WeatherApi.getWeatherData(cityName)));
+        WeatherReport weatherReport = WeatherReport.from(WeatherApi.getWeatherData(cityName));
+        System.out.println(gson.toJson(weatherReport));
+        return weatherReport;
     }
 }
