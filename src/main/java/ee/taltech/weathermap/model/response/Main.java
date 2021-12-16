@@ -1,8 +1,10 @@
 package ee.taltech.weathermap.model.response;
 
+import lombok.Getter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
 public class Main {
     private int temp;
     private int feels_like;

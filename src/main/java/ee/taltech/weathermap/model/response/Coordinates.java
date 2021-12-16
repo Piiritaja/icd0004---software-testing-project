@@ -14,4 +14,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class Coordinates {
     private float lon;
     private float lat;
+
+    public String getFormatted(){
+        return String.format("%f,%f", lat, lon);
+    }
 }
