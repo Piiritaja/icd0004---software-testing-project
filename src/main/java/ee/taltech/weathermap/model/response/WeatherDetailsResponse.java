@@ -1,12 +1,14 @@
 package ee.taltech.weathermap.model.response;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
+@Setter
 public class WeatherDetailsResponse {
     private Coordinates coord;
     private List<Weather> weather;
