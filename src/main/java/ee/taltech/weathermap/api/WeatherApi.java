@@ -14,7 +14,7 @@ import static com.sun.jersey.api.json.JSONConfiguration.FEATURE_POJO_MAPPING;
 
 public class WeatherApi {
 
-    public static WeatherDetailsResponse getWeatherData(String cityName) {
+    public WeatherDetailsResponse getWeatherData(String cityName) {
         Client client = getConfiguredClient();
 
         ClientResponse response = client.resource("https://api.openweathermap.org/data/2.5/weather")

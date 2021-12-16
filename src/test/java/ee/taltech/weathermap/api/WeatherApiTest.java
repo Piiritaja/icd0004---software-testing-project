@@ -9,15 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WeatherApiTest {
 
+    private WeatherApi api;
+
     @BeforeEach
     void setUp() {
+        api = new WeatherApi();
     }
 
     @Test
     void shouldReturnCityNameInWeatherDetailsResponseWhenCityNameIsCorrect() {
         String cityName = "Keila";
 
-        WeatherDetailsResponse weatherData = WeatherApi.getWeatherData(cityName);
+        WeatherDetailsResponse weatherData = api.getWeatherData(cityName);
 
         assertEquals(cityName, weatherData.getName());
     }
@@ -26,7 +29,7 @@ class WeatherApiTest {
     void shouldReturnWeatherInWeatherDetailsResponse_whenCityNameIsKeila() {
         String cityName = "Keila";
 
-        WeatherDetailsResponse weatherData = WeatherApi.getWeatherData(cityName);
+        WeatherDetailsResponse weatherData = api.getWeatherData(cityName);
 
         assertNotNull(weatherData.getWeather().get(0));
         assertNotNull(weatherData.getWeather().get(0).getMain());

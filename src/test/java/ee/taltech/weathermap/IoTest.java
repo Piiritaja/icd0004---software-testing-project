@@ -1,5 +1,6 @@
 package ee.taltech.weathermap;
 
+import ee.taltech.weathermap.api.WeatherApi;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
 import ee.taltech.weathermap.model.CurrentWeatherData;
 import ee.taltech.weathermap.model.MainWeatherData;
@@ -14,7 +15,7 @@ class IoTest {
 
     @BeforeEach
     void setUp() {
-        io = new Io();
+        io = new Io(new WeatherApi());
     }
 
     @Test
