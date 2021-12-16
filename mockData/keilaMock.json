@@ -1,0 +1,45 @@
+{
+  "coord": {
+    "lon": 24.4131,
+    "lat": 59.3036
+  },
+  "weather": [
+    {
+      "id": 802,
+      "main": "Clouds",
+      "description": "scattered clouds",
+      "icon": "03n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 2,
+    "feels_like": -1,
+    "temp_min": 2,
+    "temp_max": 3,
+    "pressure": 1014,
+    "humidity": 87,
+    "sea_level": 0,
+    "grnd_level": 0
+  },
+  "visibility": "10000",
+  "wind": {
+    "speed": 0,
+    "deg": 0,
+    "gust": 0
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1639698466,
+  "sys": {
+    "type": 0,
+    "id": 0,
+    "sunrise": 0,
+    "sunset": 0
+  },
+  "timezone": 7200,
+  "id": 591472,
+  "name": "Keila",
+  "cood": 0
+}
