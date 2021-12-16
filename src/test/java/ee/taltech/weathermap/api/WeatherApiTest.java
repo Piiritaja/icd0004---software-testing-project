@@ -23,17 +23,6 @@ class WeatherApiTest {
     }
 
     @Test
-    void shouldReturnCoordinatesInWeatherDetailsResponse_whenCityNameIsKeila() {
-        String cityName = "Keila";
-
-        WeatherDetailsResponse weatherData = WeatherApi.getWeatherData(cityName);
-
-        Coordinates expectedCoordinates = Coordinates.builder().lon(24.4131f).lat(59.3036f).build();
-
-        assertEquals(expectedCoordinates, weatherData.getCoord());
-    }
-
-    @Test
     void shouldReturnWeatherInWeatherDetailsResponse_whenCityNameIsKeila() {
         String cityName = "Keila";
 
