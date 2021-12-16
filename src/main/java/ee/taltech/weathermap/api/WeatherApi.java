@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import ee.taltech.weathermap.exception.InvalidCityNameException;
 import ee.taltech.weathermap.model.response.WeatherDetailsResponse;
 import ee.taltech.weathermap.store.KeyStore;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
@@ -21,8 +22,11 @@ public class WeatherApi {
                 .queryParam("q", cityName)
                 .queryParam("units", "metric")
                 .get(ClientResponse.class);
-
-        return response.getEntity(WeatherDetailsResponse.class);
+        WeatherDetailsResponse weatherDetailsResponse = response.getEntity(WeatherDetailsResponse.class);
+        if (response.getStatus() != 200) {
+            throw new InvalidCityNameException();
+        }
+        return weatherDetailsResponse;
     }
 
     private static Client getConfiguredClient() {
