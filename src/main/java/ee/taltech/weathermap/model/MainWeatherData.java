@@ -8,7 +8,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MainWeatherData {
-    private String name;
-
+    private String city;
+    private String coordinates;
+    private String temperatureUnit;
 
 }
