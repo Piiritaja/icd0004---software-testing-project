@@ -15,10 +15,11 @@ public class MainWeatherData {
     private String coordinates;
     private String temperatureUnit;
 
-    public static MainWeatherData from(WeatherDetailsResponse weatherDetails){
+    public static MainWeatherData from(WeatherDetailsResponse weatherDetails) {
         return MainWeatherData.builder()
                 .coordinates(weatherDetails.getCoord().getFormatted())
                 .city(weatherDetails.getName())
+                .temperatureUnit(weatherDetails.getMain().getUnit())
                 .build();
     }
 }
