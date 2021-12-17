@@ -18,6 +18,7 @@
     "temp_min": 2,
     "temp_max": 3,
     "pressure": 1014,
+    "unit": "celsius",
     "humidity": 87,
     "sea_level": 0,
     "grnd_level": 0

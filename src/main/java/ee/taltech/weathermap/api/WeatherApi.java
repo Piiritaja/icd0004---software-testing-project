@@ -1,14 +1,20 @@
 package ee.taltech.weathermap.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
+import ee.taltech.weathermap.model.WeatherReport;
 import ee.taltech.weathermap.model.response.WeatherDetailsResponse;
 import ee.taltech.weathermap.store.KeyStore;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static com.sun.jersey.api.json.JSONConfiguration.FEATURE_POJO_MAPPING;
 
@@ -26,8 +32,12 @@ public class WeatherApi {
         if (response.getStatus() != 200) {
             throw new InvalidCityNameException();
         }
+
+        weatherDetailsResponse.getMain().setUnit("celsius");
+
         return weatherDetailsResponse;
     }
+
 
     private static Client getConfiguredClient() {
         ClientConfig clientConfig = new DefaultClientConfig();
