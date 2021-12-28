@@ -8,6 +8,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.List;
 
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherForecastResponse {
     private String cod;

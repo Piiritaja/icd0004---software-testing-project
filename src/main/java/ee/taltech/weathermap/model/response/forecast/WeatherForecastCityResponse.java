@@ -1,8 +1,10 @@
 package ee.taltech.weathermap.model.response.forecast;
 
 import ee.taltech.weathermap.model.response.Coordinates;
+import lombok.Getter;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherForecastCityResponse {
     private long id;

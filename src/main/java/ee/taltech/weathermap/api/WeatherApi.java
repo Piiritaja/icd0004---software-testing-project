@@ -39,7 +39,7 @@ public class WeatherApi {
         return weatherDetailsResponse;
     }
 
-    public WeatherForecastResponse getWeatherForecast(String cityName, int forecastDays){
+    public WeatherForecastResponse getWeatherForecast(String cityName){
         //TODO
         return new WeatherForecastResponse();
     }
