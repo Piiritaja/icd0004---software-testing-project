@@ -42,11 +42,13 @@ class IoTest {
 
     @Test
     public void shouldIncludeMainDetailsInWeatherReport_whenInputNameIsKeila() {
+        assertNotNull(io.getWeatherReport("Keila").getMainDetails());
         assertEquals(MainWeatherData.class, io.getWeatherReport("Keila").getMainDetails().getClass());
     }
 
     @Test
     public void shouldIncludeCurrentWeatherDataInWeatherData_whenInputNameIsKeila() {
+        assertNotNull(io.getWeatherReport("Keila").getCurrentWeatherData());
         assertEquals(CurrentWeatherData.class, io.getWeatherReport("Keila").getCurrentWeatherData().getClass());
     }
 
