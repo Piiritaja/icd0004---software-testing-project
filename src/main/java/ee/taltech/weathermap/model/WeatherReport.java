@@ -11,6 +11,7 @@ import lombok.*;
 public class WeatherReport {
     private MainWeatherData mainDetails;
     private CurrentWeatherData currentWeatherData;
+    private ForecastReport forecastReport;
 
     public static WeatherReport from(WeatherDetailsResponse weatherDetails) {
         return WeatherReport.builder()
