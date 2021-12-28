@@ -9,6 +9,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
 import ee.taltech.weathermap.model.WeatherReport;
 import ee.taltech.weathermap.model.response.WeatherDetailsResponse;
+import ee.taltech.weathermap.model.response.forecast.WeatherForecastResponse;
 import ee.taltech.weathermap.store.KeyStore;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
@@ -36,6 +37,11 @@ public class WeatherApi {
         weatherDetailsResponse.getMain().setUnit("celsius");
 
         return weatherDetailsResponse;
+    }
+
+    public WeatherForecastResponse getWeatherForecast(String cityName, int forecastDays){
+        //TODO
+        return new WeatherForecastResponse();
     }
 
 
