@@ -3,6 +3,7 @@ package ee.taltech.weathermap;
 import ee.taltech.weathermap.api.WeatherApi;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
 import ee.taltech.weathermap.model.CurrentWeatherData;
+import ee.taltech.weathermap.model.ForecastReport;
 import ee.taltech.weathermap.model.MainWeatherData;
 import ee.taltech.weathermap.model.WeatherReport;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,5 +48,11 @@ class IoTest {
     @Test
     public void shouldIncludeCurrentWeatherDataInWeatherData_whenInputNameIsKeila() {
         assertEquals(CurrentWeatherData.class, io.getWeatherReport("Keila").getCurrentWeatherData().getClass());
+    }
+
+    @Test
+    public void shouldIncludeForecastRepostInWeatherData_whenInputNameIsKeila(){
+        assertNotNull(io.getWeatherReport("Keila").getForecastReport());
+        assertEquals(ForecastReport.class, io.getWeatherReport("Keila").getForecastReport().getClass());
     }
 }
