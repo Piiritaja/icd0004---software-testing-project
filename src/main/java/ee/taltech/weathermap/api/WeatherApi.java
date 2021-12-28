@@ -40,8 +40,20 @@ public class WeatherApi {
     }
 
     public WeatherForecastResponse getWeatherForecast(String cityName){
-        //TODO
-        return new WeatherForecastResponse();
+        Client client = getConfiguredClient();
+
+        ClientResponse response = client.resource("https://api.openweathermap.org/data/2.5/forecast")
+                .queryParam("appid", KeyStore.API_KEY)
+                .queryParam("q", cityName)
+                .queryParam("units", "metric")
+                .get(ClientResponse.class);
+
+        WeatherForecastResponse weatherForecastResponse = response.getEntity(WeatherForecastResponse.class);
+        if (response.getStatus() != 200) {
+            throw new InvalidCityNameException();
+        }
+
+        return weatherForecastResponse;
     }
 
 
