@@ -17,6 +17,7 @@ public class WeatherReport {
         return WeatherReport.builder()
                 .currentWeatherData(CurrentWeatherData.from(weatherDetails))
                 .mainDetails(MainWeatherData.from(weatherDetails))
+                .forecastReport(ForecastReport.from(weatherDetails))
                 .build();
     }
 }
