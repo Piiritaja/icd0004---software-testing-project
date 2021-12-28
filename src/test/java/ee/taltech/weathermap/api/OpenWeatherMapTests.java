@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasKey;
 
 public class OpenWeatherMapTests {
     private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
+    private static final String FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
     /*
     SMOKE tests
@@ -65,4 +66,35 @@ public class OpenWeatherMapTests {
                 .body("coord", hasKey("lon"))
                 .body("coord", hasKey("lat"));
     }
+
+    /*
+    Forecast
+     */
+
+    @Test
+    public void shouldHaveCityNameInForecastResponseWhenCityNameIsGiven() {
+        given()
+                .queryParam("q", "Keila")
+                .queryParam("units", "metric")
+                .queryParam("appid", KeyStore.API_KEY)
+                .when()
+                .get(FORECAST_URL)
+                .then()
+                .body("$", hasKey("city"))
+                .body("city", hasKey("name"))
+                .body("city.name", equalTo("Keila"));
+    }
+
+    @Test
+    public void shouldHaveForecastDataInForecastResponseWhenCityNameIsGiven(){
+        given()
+                .queryParam("q", "Keila")
+                .queryParam("units", "metric")
+                .queryParam("appid", KeyStore.API_KEY)
+                .when()
+                .get(FORECAST_URL)
+                .then()
+                .body("$", hasKey("list"));
+    }
+
 }
