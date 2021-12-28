@@ -22,7 +22,7 @@ public class WeatherData {
     private double pressure;
 
     public static WeatherData from(WeatherDetailsResponse weatherDetails){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return WeatherData.builder()
                 .date(formatter.format(new Date(System.currentTimeMillis())))
                 .temperature(weatherDetails.getMain().getTemp())
