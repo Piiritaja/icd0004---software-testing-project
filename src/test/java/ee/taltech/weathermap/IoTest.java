@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -78,14 +80,11 @@ class IoTest {
     public void shouldIncludeThreeDayForecastInForecastReport_whenInputNameIsKeila() {
         List<WeatherData> weather = io.getWeatherReport("Keila").getForecastReport().getWeatherData();
         assertTrue(weather.size() >= 3);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate current = LocalDate.now();
         for (int i = 0; i < 3; i++) {
-            WeatherData weatherData = weather.get(i);
-            Date dt = new Date();
-            Calendar c = Calendar.getInstance();
-            c.setTime(dt);
-            c.add(Calendar.DATE, i + 1);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            assertEquals(dateFormat.format(dt), weatherData.getDate());
+            LocalDate date = current.plusDays(i + 1);
+            assertEquals(date.format(dateFormat), weather.get(i).getDate());
         }
     }
 }
