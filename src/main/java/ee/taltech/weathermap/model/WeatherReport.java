@@ -15,11 +15,9 @@ public class WeatherReport {
     private ForecastReport forecastReport;
 
     public static WeatherReport from(WeatherDetailsResponse weatherDetails) {
-        WeatherApi api = new WeatherApi();
         return WeatherReport.builder()
                 .currentWeatherData(CurrentWeatherData.from(weatherDetails))
                 .mainDetails(MainWeatherData.from(weatherDetails))
-                .forecastReport(ForecastReport.from(api.getWeatherForecast(weatherDetails.getName())))
                 .build();
     }
 }

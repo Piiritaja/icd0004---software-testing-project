@@ -30,6 +30,9 @@ public class ForecastReport {
     }
 
     private static List<WeatherData> getThreeDayForecastFromForecastResponse(WeatherForecastResponse weatherDetails) {
+        if (weatherDetails == null){
+            return new ArrayList<>();
+        }
         List<WeatherForecastWeatherResponse> weatherData = weatherDetails.getList();
         List<String> days = getNextThreeDays();
         List<WeatherData> weatherDataReturn = new ArrayList<>();

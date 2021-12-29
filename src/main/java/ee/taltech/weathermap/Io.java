@@ -15,6 +15,10 @@ public class Io {
     public WeatherReport getWeatherReport(String cityName) {
         Gson gson = new Gson();
         WeatherReport weatherReport = WeatherReport.from(api.getWeatherData(cityName));
+        ForecastReport forecastReport = getWeatherForecastReport(cityName);
+        if (forecastReport != null) {
+            weatherReport.setForecastReport(forecastReport);
+        }
         System.out.println(gson.toJson(weatherReport));
         return weatherReport;
     }
