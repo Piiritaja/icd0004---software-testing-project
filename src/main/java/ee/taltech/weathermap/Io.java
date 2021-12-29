@@ -2,7 +2,9 @@ package ee.taltech.weathermap;
 
 import com.google.gson.Gson;
 import ee.taltech.weathermap.api.WeatherApi;
+import ee.taltech.weathermap.model.ForecastReport;
 import ee.taltech.weathermap.model.WeatherReport;
+import ee.taltech.weathermap.model.response.forecast.WeatherForecastResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -15,5 +17,9 @@ public class Io {
         WeatherReport weatherReport = WeatherReport.from(api.getWeatherData(cityName));
         System.out.println(gson.toJson(weatherReport));
         return weatherReport;
+    }
+
+    public ForecastReport getWeatherForecastReport(String cityName) {
+        return ForecastReport.from(api.getWeatherForecast(cityName));
     }
 }

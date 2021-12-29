@@ -17,9 +17,9 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherData {
     private String date;
-    private double temperature;
+    private int temperature;
     private int humidity;
-    private double pressure;
+    private int pressure;
 
     public static WeatherData from(WeatherDetailsResponse weatherDetails){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
