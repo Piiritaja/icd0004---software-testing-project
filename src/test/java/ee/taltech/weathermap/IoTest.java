@@ -9,6 +9,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,22 +26,18 @@ class IoTest {
 
     @BeforeEach
     void setUp() {
-        io = new Io(new WeatherApi());
+        io = new Io(new WeatherApi(), "test_output_files/");
     }
 
     @Test
     public void whenCalledWithBlankCityName_throwsInvalidCityNameException() {
-        assertThrows(InvalidCityNameException.class, () -> {
-            io.getWeatherReport("");
-        });
+        assertThrows(InvalidCityNameException.class, () -> io.getWeatherReport(""));
 
     }
 
     @Test
     public void whenCalledWithFictionalCityName_throwsInvalidCityNameException() {
-        assertThrows(InvalidCityNameException.class, () -> {
-            io.getWeatherReport("xoxo");
-        });
+        assertThrows(InvalidCityNameException.class, () -> io.getWeatherReport("xoxo"));
     }
 
     @Test
@@ -92,13 +89,34 @@ class IoTest {
 
     @Test
     public void shouldThrowFileTypeNotSupportedException_whenInputFileJson() {
-        String inputFileName = "wrongType.json";
+        String inputFileName = "input_files/wrongType.json";
         assertThrows(FileTypeNotSupportedException.class, () -> io.generateWeatherReport(inputFileName));
     }
 
     @Test
-    public void shouldThrowFileNotFoundException_whenInputFileIsMissing(){
-        String inputFileName = "notFound.txt";
+    public void shouldThrowFileNotFoundException_whenInputFileIsMissing() {
+        String inputFileName = "input_files/notFound.txt";
         assertThrows(FileNotFoundException.class, () -> io.generateWeatherReport(inputFileName));
+    }
+
+    @Test
+    public void shouldWriteWeatherReportToJsonFile_whenInputFileIsTxt() {
+        clearFolder(new File("test_output_files"));
+        String inputFileName = "input_files/testCity.txt";
+        io.generateWeatherReport(inputFileName);
+        File f1 = new File("test_output_files/keila_report.json");
+        assertTrue(f1.exists());
+    }
+
+    private static void clearFolder(File folder) {
+        File[] files = folder.listFiles();
+        assert files != null;
+        for (File f : files) {
+            if (f.isDirectory()) {
+                clearFolder(f);
+            } else {
+                f.delete();
+            }
+        }
     }
 }

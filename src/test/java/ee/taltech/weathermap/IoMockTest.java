@@ -34,7 +34,7 @@ public class IoMockTest {
 
     @BeforeEach
     void setup() {
-        io = new Io(weatherApi);
+        io = new Io(weatherApi,"test_output_files/");
     }
 
     private WeatherDetailsResponse loadMock(String mockCity) throws FileNotFoundException {
