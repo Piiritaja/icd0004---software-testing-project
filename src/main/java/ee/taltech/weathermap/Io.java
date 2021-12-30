@@ -77,6 +77,10 @@ public class Io {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String outputFileName = outputPath + weatherReport.getMainDetails().getCity().toLowerCase(Locale.ROOT) + "_report.json";
         try (FileWriter fileWriter = new FileWriter(outputFileName)) {
+            File file = new File(outputFileName);
+            if (file.exists()) {
+                log.info("Report file for " + weatherReport.getMainDetails().getCity() + " already exists. Overwriting file");
+            }
             gson.toJson(weatherReport, fileWriter);
             log.info("Report in file " + outputFileName);
         } catch (IOException ignore) {
