@@ -23,6 +23,11 @@ public class Io {
         return weatherReport;
     }
 
+    public WeatherReport generateWeatherReport(String fileName) {
+        //TODO
+        return new WeatherReport();
+    }
+
     public ForecastReport getWeatherForecastReport(String cityName) {
         return ForecastReport.from(api.getWeatherForecast(cityName));
     }
