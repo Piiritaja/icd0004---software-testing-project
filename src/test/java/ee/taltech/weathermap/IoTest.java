@@ -1,5 +1,6 @@
 package ee.taltech.weathermap;
 
+import com.google.gson.Gson;
 import ee.taltech.weathermap.api.WeatherApi;
 import ee.taltech.weathermap.exception.FileTypeNotSupportedException;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,6 +29,7 @@ class IoTest {
 
     @BeforeEach
     void setUp() {
+        clearFolder(new File("test_output_files"));
         io = new Io(new WeatherApi(), "test_output_files/");
     }
 
@@ -101,11 +105,23 @@ class IoTest {
 
     @Test
     public void shouldWriteWeatherReportToJsonFile_whenInputFileIsTxt() {
-        clearFolder(new File("test_output_files"));
         String inputFileName = "input_files/testCity.txt";
         io.generateWeatherReport(inputFileName);
         File f1 = new File("test_output_files/keila_report.json");
         assertTrue(f1.exists());
+    }
+
+    @Test
+    public void shouldWriteKeilaReportToJson_whenInputFileContainsKeila() {
+        String inputFileName = "input_files/testCity.txt";
+        io.generateWeatherReport(inputFileName);
+        Gson gson = new Gson();
+        try (FileReader fileReader = new FileReader("test_output_files/keila_report.json")) {
+            WeatherReport weatherReport = gson.fromJson(fileReader, WeatherReport.class);
+            assertEquals("Keila", weatherReport.getMainDetails().getCity());
+        } catch (IOException ignore) {
+            fail();
+        }
     }
 
     private static void clearFolder(File folder) {
