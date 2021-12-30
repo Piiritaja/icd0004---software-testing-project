@@ -1,6 +1,7 @@
 package ee.taltech.weathermap;
 
 import ee.taltech.weathermap.api.WeatherApi;
+import ee.taltech.weathermap.exception.FileTypeNotSupportedException;
 import ee.taltech.weathermap.exception.InvalidCityNameException;
 import ee.taltech.weathermap.model.*;
 import ee.taltech.weathermap.model.response.Weather;
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -86,5 +88,17 @@ class IoTest {
             LocalDate date = current.plusDays(i + 1);
             assertEquals(date.format(dateFormat), weather.get(i).getDate());
         }
+    }
+
+    @Test
+    public void shouldThrowFileTypeNotSupportedException_whenInputFileJson() {
+        String inputFileName = "wrongType.json";
+        assertThrows(FileTypeNotSupportedException.class, () -> io.generateWeatherReport(inputFileName));
+    }
+
+    @Test
+    public void shouldThrowFileNotFoundException_whenInputFileIsMissing(){
+        String inputFileName = "notFound.txt";
+        assertThrows(FileNotFoundException.class, () -> io.generateWeatherReport(inputFileName));
     }
 }
