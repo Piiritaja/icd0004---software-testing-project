@@ -124,6 +124,53 @@ class IoTest {
         }
     }
 
+    @Test
+    public void shouldGenerateSameFileFromFileAsInputString_whenInputFileAndInputStringKeila() {
+        String inputFileName = "input_files/testCity.txt";
+        io.generateWeatherReport(inputFileName);
+        WeatherReport originalReport = io.getWeatherReport("Keila");
+        Gson gson = new Gson();
+        try (FileReader fileReader = new FileReader("test_output_files/keila_report.json")) {
+            WeatherReport weatherReport = gson.fromJson(fileReader, WeatherReport.class);
+            assertEquals(originalReport.getMainDetails(), weatherReport.getMainDetails());
+        } catch (IOException ignore) {
+            fail();
+        }
+    }
+
+    @Test
+    public void shouldGenerateMultipleFiles_whenInputFileContainsMultipleCities() {
+        String inputFileName = "input_files/testCities.txt";
+        io.generateWeatherReport(inputFileName);
+        File f1 = new File("test_output_files/tallinn_report.json");
+        File f2 = new File("test_output_files/tartu_report.json");
+        File f3 = new File("test_output_files/narva_report.json");
+        assertTrue(f1.exists());
+        assertTrue(f2.exists());
+        assertTrue(f3.exists());
+    }
+
+    @Test
+    public void shouldGenerateSameFileFromFileAsInputString_whenMultipleNamesInFile() {
+        String inputFileName = "input_files/testCities.txt";
+        io.generateWeatherReport(inputFileName);
+        WeatherReport tallinnReport = io.getWeatherReport("Tallinn");
+        WeatherReport tartuReport = io.getWeatherReport("Tartu");
+        WeatherReport narvaReport = io.getWeatherReport("Narva");
+
+        Gson gson = new Gson();
+        try {
+            WeatherReport tallinnFileReport = gson.fromJson(new FileReader("test_output_files/tallinn_report.json"), WeatherReport.class);
+            WeatherReport tartuFileReport = gson.fromJson(new FileReader("test_output_files/tartu_report.json"), WeatherReport.class);
+            WeatherReport narvaFileReport = gson.fromJson(new FileReader("test_output_files/narva_report.json"), WeatherReport.class);
+            assertEquals(tallinnReport.getMainDetails(), tallinnFileReport.getMainDetails());
+            assertEquals(tartuReport.getMainDetails(), tartuFileReport.getMainDetails());
+            assertEquals(narvaReport.getMainDetails(), narvaFileReport.getMainDetails());
+        } catch (IOException ignore) {
+            fail();
+        }
+    }
+
     private static void clearFolder(File folder) {
         File[] files = folder.listFiles();
         assert files != null;
