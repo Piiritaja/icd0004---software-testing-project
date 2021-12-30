@@ -26,6 +26,7 @@ dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.1.0'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha5'
     testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.0-alpha5'
+    testImplementation 'org.mockito:mockito-inline:4.2.0'
 }
 
 test {
