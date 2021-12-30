@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class MainWeatherData {
     private String city;
     private String coordinates;
