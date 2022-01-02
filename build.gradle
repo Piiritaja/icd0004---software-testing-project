@@ -1,12 +1,22 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+apply plugin: 'java'
+group 'ee.taltech.weathermap'
+version '1.0'
 
 repositories {
     mavenCentral()
+}
+
+
+jar {
+    manifest {
+        attributes "Main-Class": "ee.taltech.weathermap.Application"
+    }
+
 }
 
 dependencies {

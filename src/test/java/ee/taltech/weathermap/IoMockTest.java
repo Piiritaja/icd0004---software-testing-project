@@ -113,12 +113,17 @@ public class IoMockTest {
     @SneakyThrows
     public void shouldHaveThreeDaysInForecast_whenCityNameKeila() {
         String cityName = "Keila";
-        WeatherDetailsResponse weatherDetails = loadMock(cityName);
-        WeatherForecastResponse weatherForecastResponse = loadForecastMock(cityName);
-        when(weatherApi.getWeatherData(cityName)).thenReturn(weatherDetails);
-        when(weatherApi.getWeatherForecast(cityName)).thenReturn(weatherForecastResponse);
-        WeatherReport weatherReport = io.getWeatherReport(cityName);
-        assertEquals(3, weatherReport.getForecastReport().getWeatherData().size());
+        LocalDate mockLocalDate = LocalDate.of(2021, 12, 29);
+        try (MockedStatic<LocalDate> topDateTimeUtilMock = Mockito.mockStatic(LocalDate.class)) {
+            topDateTimeUtilMock.when(LocalDate::now).thenReturn(mockLocalDate);
+            WeatherDetailsResponse weatherDetails = loadMock(cityName);
+            WeatherForecastResponse weatherForecastResponse = loadForecastMock(cityName);
+            when(weatherApi.getWeatherData(cityName)).thenReturn(weatherDetails);
+            when(weatherApi.getWeatherForecast(cityName)).thenReturn(weatherForecastResponse);
+            WeatherReport weatherReport = io.getWeatherReport(cityName);
+            assertEquals(3, weatherReport.getForecastReport().getWeatherData().size());
+        }
+
     }
 
     @Test
