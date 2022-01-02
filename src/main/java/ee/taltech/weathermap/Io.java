@@ -82,7 +82,7 @@ public class Io {
                 log.info("Report file for " + weatherReport.getMainDetails().getCity() + " already exists. Overwriting file");
             }
             gson.toJson(weatherReport, fileWriter);
-            log.info("Report in file " + outputFileName);
+            log.info("Report in file " + file.getAbsolutePath());
         } catch (IOException ignore) {
 
         }
