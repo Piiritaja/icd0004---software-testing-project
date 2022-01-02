@@ -113,6 +113,7 @@ public class IoMockTest {
     @SneakyThrows
     public void shouldHaveThreeDaysInForecast_whenCityNameKeila() {
         String cityName = "Keila";
+
         LocalDate mockLocalDate = LocalDate.of(2021, 12, 29);
         try (MockedStatic<LocalDate> topDateTimeUtilMock = Mockito.mockStatic(LocalDate.class)) {
             topDateTimeUtilMock.when(LocalDate::now).thenReturn(mockLocalDate);
