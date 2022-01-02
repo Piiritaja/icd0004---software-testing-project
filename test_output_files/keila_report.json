@@ -7,9 +7,9 @@
   "currentWeatherData": {
     "weatherData": {
       "date": "2022-01-02",
-      "temperature": -11,
-      "humidity": 85,
-      "pressure": 1019
+      "temperature": -4,
+      "humidity": 93,
+      "pressure": 998
     }
   },
   "forecastReport": {
@@ -18,19 +18,19 @@
         "date": "2022-01-03",
         "temperature": 0,
         "humidity": 98,
-        "pressure": 991
+        "pressure": 992
       },
       {
         "date": "2022-01-04",
         "temperature": 0,
-        "humidity": 91,
-        "pressure": 985
+        "humidity": 94,
+        "pressure": 988
       },
       {
         "date": "2022-01-05",
         "temperature": 0,
-        "humidity": 96,
-        "pressure": 983
+        "humidity": 93,
+        "pressure": 986
       }
     ]
   }
