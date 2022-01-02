@@ -1,9 +1,8 @@
+
 plugins {
     id 'java'
-    id 'application'
 }
 
-apply plugin: 'java'
 group 'ee.taltech.weathermap'
 version '1.0'
 
@@ -12,11 +11,18 @@ repositories {
 }
 
 
+apply plugin: 'java'
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
-        attributes "Main-Class": "ee.taltech.weathermap.Application"
+        attributes 'Main-Class': 'ee.taltech.weathermap.Application'
     }
+    from {
+        configurations.compileClasspath.filter{
+            it.exists() }.collect {
+            it.isDirectory() ? it : zipTree(it) }
 
+    }
 }
 
 dependencies {
@@ -38,6 +44,7 @@ dependencies {
     testImplementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.0-alpha5'
     testImplementation 'org.mockito:mockito-inline:4.2.0'
 }
+
 
 test {
     useJUnitPlatform()
