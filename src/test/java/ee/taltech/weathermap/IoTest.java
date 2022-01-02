@@ -173,12 +173,13 @@ class IoTest {
 
     private static void clearFolder(File folder) {
         File[] files = folder.listFiles();
-        assert files != null;
-        for (File f : files) {
-            if (f.isDirectory()) {
-                clearFolder(f);
-            } else {
-                f.delete();
+        if (files != null){
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    clearFolder(f);
+                } else {
+                    f.delete();
+                }
             }
         }
     }
